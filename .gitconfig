@@ -1,0 +1,14 @@
+[user]
+	name = Daniel Peach
+	email = dpeaches96@gmail.com
+
+[core]
+	excludesfile = /Users/daniel/.gitignore_global
+[color]
+	ui = auto
+[alias]
+	acm = !git add -A && git commit -m
+[alias]
+	b = !git branch
+[alias]
+	s = !git status
