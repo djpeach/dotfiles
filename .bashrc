@@ -1,9 +1,9 @@
-export PATH
+# Environment Variables
+export EMAIL_USERNAME="dpeaches96@gmail.com"
+export EMAIL_PASSWORD="ygckztoisjndgmpy"
+export VIRTENV_LOC="/Users/peachbook/.local/share/virtualenvs/" # add the path to your virtual environments here
 
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/usr/local/opt/icu4c/bin:$PATH"
-export PATH="/usr/local/opt/icu4c/sbin:$PATH"
-
+# Custom terminal prompt:
 # Special Characters:
 
 # \h the hostname up to the first .
@@ -36,6 +36,13 @@ PS1+="\[${white}\]\$ ";
 export PS1;
 
 # Aliases
+alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
+alias editBash="code ~/.bashrc"
+alias editGit="code ~/.gitconfig"
+alias django="python manage.py $@"
+alias gif="git flow $@"
+alias getIP="ifconfig | grep 'inet ' | grep -v 127.0.0.1"
+alias pipfreeze="pip freeze --local | grep -v $@ > requirements.txt"
 alias resource="source ~/.bashrc"
 
 
@@ -57,18 +64,18 @@ mkEnv()
 nlEnv()
 {
   origDir=$PWD;
-  cd /Users/daniel.peach/.local/share/virtualenvs/$1/bin/;
+  cd $VIRTENV_LOC/$1/bin/;
   sed -i '' 's/PS1="(/PS1="\\n(/' activate
   cd $origDir;
 }
 
 # Alias to list environments
-alias lsEnv="ls /Users/daniel.peach/.local/share/virtualenvs/"
+alias lsEnv="ls $VIRTENV_LOC/"
 
 # Function to change environments
 cdEnv()
 {
-  source /Users/daniel.peach/.local/share/virtualenvs/$@/bin/activate;
+  source $VIRTENV_LOC/$@/bin/activate;
 }
 
 # Alias to leave environment
@@ -78,12 +85,12 @@ alias exitEnv="deactivate"
 rmEnv()
 {
   if [ $1 ]; then
-    if [ -d /Users/daniel.peach/.local/share/virtualenvs/$1/ ]; then
+    if [ -d $VIRTENV_LOC/$1/ ]; then
       deactivate;
-      rm -rf /Users/daniel.peach/.local/share/virtualenvs/$1/;
+      rm -rf $VIRTENV_LOC/$1/;
         echo "  ${green}$1 has been removed and your source has been reset${white}";
     else
-      echo "  ${red}/Users/daniel.peach/.local/share/virtualenvs/$1/ is not a valid environment${white}";
+      echo "  ${red}$VIRTENV_LOC/$1/ is not a valid environment${white}";
     fi
   else
     echo "  ${red}enter an environment to remove${white}";
@@ -94,7 +101,7 @@ rmEnv()
 _virtualEnvComplete()
 {
     local cur=${COMP_WORDS[COMP_CWORD]}
-    local AUTO_COMPLETE_DIRS=$(ls /Users/daniel.peach/.local/share/virtualenvs/)
+    local AUTO_COMPLETE_DIRS=$(ls $VIRTENV_LOC/)
 
     IFS=$'\n' COMPREPLY1=( $(compgen -W "$AUTO_COMPLETE_DIRS" -- $cur))
     COMPREPLY2=( "${COMPREPLY1[@]// /\ }" )
