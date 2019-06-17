@@ -1,28 +1,9 @@
-d# Setting PATH for Python 3.6
-# The original version is saved in .bash_profile.pysave
-export PATH
-
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/usr/local/opt/icu4c/bin:$PATH"
-export PATH="/usr/local/opt/icu4c/sbin:$PATH"
-
-# Setting path for MPC
-
-export PATH="/Users/daniel/Library/Mobile Documents/com~apple~CloudDocs/Schoolwork/363/MPC:$PATH"
-export WORKON_HOME=~/VirtualEnvironments/
-
 # Environment Variables
 export EMAIL_USERNAME="dpeaches96@gmail.com"
 export EMAIL_PASSWORD="ygckztoisjndgmpy"
+export VIRTENV="" # add the path to your virtual environments here
 
-# Setting PATH for Python 3.7
-# The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
-export PATH
-
-# Setting PATH for Java 8
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_202`
-
+# Custom terminal prompt:
 # Special Characters:
 
 # \h the hostname up to the first .
@@ -56,24 +37,12 @@ export PS1;
 
 # Aliases
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
-alias home="cd ~"
 alias editBash="code ~/.bashrc"
 alias editGit="code ~/.gitconfig"
-alias learn="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Dev/Learning/"
-alias projects="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Dev/Projects/"
 alias django="python manage.py $@"
-alias resetXVim="defaults delete  com.apple.dt.Xcode DVTPlugInManagerNonApplePlugIns-Xcode-10.1"
 alias gif="git flow $@"
 alias getIP="ifconfig | grep 'inet ' | grep -v 127.0.0.1"
-# alias code="open -a Xcode"
-alias xcode='open -a /Applications/Xcode.app'
 alias pipfreeze="pip freeze --local | grep -v $@ > requirements.txt"
-alias textastic="cd /Users/daniel/Library/Mobile\ Documents/M6HJR9W95L\~com\~textasticapp\~textastic/Documents "
-alias mpc="~/MPC/mwc.pl -type make"
-alias go="make clean && make run"
-
-# Java version aliases
-alias java8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_202`"
 
 # Function to leave virtualenv, if in one
 exit() {
@@ -205,6 +174,3 @@ newTheme() {
 @import "pages/front-page";
 EOF
 }
-
-export NVM_DIR="/Users/daniel/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm`
