@@ -1,9 +1,9 @@
-# Environment Variables
-export EMAIL_USERNAME="dpeaches96@gmail.com"
-export EMAIL_PASSWORD="ygckztoisjndgmpy"
-export VIRTENV="" # add the path to your virtual environments here
+export PATH
 
-# Custom terminal prompt:
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+
 # Special Characters:
 
 # \h the hostname up to the first .
@@ -36,13 +36,8 @@ PS1+="\[${white}\]\$ ";
 export PS1;
 
 # Aliases
-alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
-alias editBash="code ~/.bashrc"
-alias editGit="code ~/.gitconfig"
-alias django="python manage.py $@"
-alias gif="git flow $@"
-alias getIP="ifconfig | grep 'inet ' | grep -v 127.0.0.1"
-alias pipfreeze="pip freeze --local | grep -v $@ > requirements.txt"
+alias resource="source ~/.bashrc"
+
 
 # Function to leave virtualenv, if in one
 exit() {
@@ -62,18 +57,18 @@ mkEnv()
 nlEnv()
 {
   origDir=$PWD;
-  cd ~/VirtualEnvironments/$1/bin/;
+  cd /Users/daniel.peach/.local/share/virtualenvs/$1/bin/;
   sed -i '' 's/PS1="(/PS1="\\n(/' activate
   cd $origDir;
 }
 
 # Alias to list environments
-alias lsEnv="ls ~/VirtualEnvironments/"
+alias lsEnv="ls /Users/daniel.peach/.local/share/virtualenvs/"
 
 # Function to change environments
 cdEnv()
 {
-  source ~/VirtualEnvironments/$@/bin/activate;
+  source /Users/daniel.peach/.local/share/virtualenvs/$@/bin/activate;
 }
 
 # Alias to leave environment
@@ -83,12 +78,12 @@ alias exitEnv="deactivate"
 rmEnv()
 {
   if [ $1 ]; then
-    if [ -d ~/VirtualEnvironments/$1/ ]; then
+    if [ -d /Users/daniel.peach/.local/share/virtualenvs/$1/ ]; then
       deactivate;
-      rm -rf ~/VirtualEnvironments/$1/;
+      rm -rf /Users/daniel.peach/.local/share/virtualenvs/$1/;
         echo "  ${green}$1 has been removed and your source has been reset${white}";
     else
-      echo "  ${red}~/VirtualEnvironments/$1/ is not a valid environment${white}";
+      echo "  ${red}/Users/daniel.peach/.local/share/virtualenvs/$1/ is not a valid environment${white}";
     fi
   else
     echo "  ${red}enter an environment to remove${white}";
@@ -99,7 +94,7 @@ rmEnv()
 _virtualEnvComplete()
 {
     local cur=${COMP_WORDS[COMP_CWORD]}
-    local AUTO_COMPLETE_DIRS=$(ls ~/VirtualEnvironments/)
+    local AUTO_COMPLETE_DIRS=$(ls /Users/daniel.peach/.local/share/virtualenvs/)
 
     IFS=$'\n' COMPREPLY1=( $(compgen -W "$AUTO_COMPLETE_DIRS" -- $cur))
     COMPREPLY2=( "${COMPREPLY1[@]// /\ }" )
@@ -141,7 +136,10 @@ newTheme() {
     if [[ -z $folder_name ]]; then
     folder_name=$theme_name
     fi;
-    cp -a /Users/daniel/Documents/Dev/Assets/Wordpress/base_theme "./$folder_name/";
+
+    git clone https://github.com/djpeach/base_theme.git;
+    rm -rf base_theme/.git;
+    mv base_theme "./$folder_name/";
 
     cat >"./$folder_name/scss/style.scss" <<EOF
 /*
@@ -156,21 +154,22 @@ newTheme() {
     Text Domain: $text_domain
     Tags: $tags
 */
-
 // ================ ABSTRACTS ================ //
 @import "abstracts/mixins";
 @import "abstracts/variables";
-
 // =================== BASE ================== //
 @import "base/base";
 @import "base/typography";
-
 // ================= VENDORS ================= //
 @import "vendors/bootstrap/bootstrap";
-
 // ================ COMPONENTS =============== //
-
 // ================== PAGES ================== //
 @import "pages/front-page";
 EOF
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && . /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
