@@ -1,6 +1,3 @@
-# Environment Variables
-export EMAIL_USERNAME="dpeaches96@gmail.com"
-export EMAIL_PASSWORD="ygckztoisjndgmpy"
 export VIRTENV_LOC="/Users/peachbook/.local/share/virtualenvs/" # add the path to your virtual environments here
 
 # Custom terminal prompt:
@@ -112,71 +109,11 @@ complete -F _virtualEnvComplete nlEnv
 complete -F _virtualEnvComplete cdEnv
 complete -F _virtualEnvComplete rmEnv
 
-# Function to create a new Wordpress theme in the current director
-newTheme() {
-    echo "";
-    theme_name="";
-    while [[ -z $theme_name ]]
-    do
-    echo "(required)";
-    read -p "Theme Name: " theme_name;
-    done;
-    read -p "Theme URI: " theme_uri;
-    read -p "Author: " author;
-    read -p "Author URI: " author_uri;
-    read -p "Description: " description;
-    read -p "Version (1.0): " version;
-    read -p "License (GNU v2): " license;
-    read -p "License URI (http://www.gnu.org/licenses/gpl-2.0.html): " license_uri;
-    read -p "Text Domain: " text_domain;
-    read -p "Tags: " tags;
-    read -p "Folder Name: (${theme_name}): " folder_name
-    if [[ -z $version ]]; then
-    version="1.0"
-    fi;
-    if [[ -z $license ]]; then
-    license="GNU v2"
-    fi;
-    if [[ -z $license_uri ]]; then
-    license_uri="http://www.gnu.org/licenses/gpl-2.0.html"
-    fi;
-    if [[ -z $folder_name ]]; then
-    folder_name=$theme_name
-    fi;
-
-    git clone https://github.com/djpeach/base_theme.git;
-    rm -rf base_theme/.git;
-    mv base_theme "./$folder_name/";
-
-    cat >"./$folder_name/scss/style.scss" <<EOF
-/*
-    Theme Name: $theme_name
-    Theme URI: $theme_uri
-    Author: $author
-    Author URI: $author_uri
-    Description: $description
-    Version: $version
-    License: $license
-    License URI: $license_uri
-    Text Domain: $text_domain
-    Tags: $tags
-*/
-// ================ ABSTRACTS ================ //
-@import "abstracts/mixins";
-@import "abstracts/variables";
-// =================== BASE ================== //
-@import "base/base";
-@import "base/typography";
-// ================= VENDORS ================= //
-@import "vendors/bootstrap/bootstrap";
-// ================ COMPONENTS =============== //
-// ================== PAGES ================== //
-@import "pages/front-page";
-EOF
-}
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && . /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+
+export PATH=$PATH:/usr/local/bin/custom;
+export PATH=/Applications/CMake.app/Contents/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin/custom
