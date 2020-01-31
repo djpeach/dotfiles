@@ -12,3 +12,10 @@
 	b = !git branch
 [alias]
 	s = !git status
+[alias]
+	alcommit = "!f() { \
+	if [ "$(git symbolic-ref --short HEAD)" == "master" ]; then \
+    echo "On branch master, do not commit here"; \
+	else \
+    git commit -m \"$(git symbolic-ref --short HEAD) $1\"; \
+	fi }; f"
