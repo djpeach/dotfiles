@@ -8,14 +8,13 @@
 	ui = auto
 [alias]
 	acm = !git add -A && git commit -m
-[alias]
 	b = !git branch
-[alias]
 	s = !git status
-[alias]
-	alcommit = "!f() { \
+	bcommit = "!f() { \
 	if [ "$(git symbolic-ref --short HEAD)" == "master" ]; then \
-    echo "On branch master, do not commit here"; \
+    echo "ERROR: On branch master, do not commit here!"; \
 	else \
     git commit -m \"$(git symbolic-ref --short HEAD) $1\"; \
 	fi }; f"
+	go = !git add -A && git commit -m "committing" && git push --force -u origin master
+	get = "!f() { user=''; if [ -z $2 ]; then user='djpeach'; else user=$2; fi; git clone "https://github.com/${user}/${1}"; }; f"
